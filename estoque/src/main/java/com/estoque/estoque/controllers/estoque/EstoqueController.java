@@ -81,19 +81,22 @@ public class EstoqueController {
     }
 
     @PostMapping("/cadastro-produto-estoque")
-    public ModelAndView cadastrarProdutoEmEstoque(@RequestParam Long estoqueId, @ModelAttribute Produto produto, @RequestParam int quantidade, Model model) {
+    public ModelAndView cadastrarProdutoEmEstoque(@RequestParam Long estoqueId, @RequestParam Long produtoId, @RequestParam int quantidade, Model model) {
         Optional<Estoque> estoqueOptional = estoqueRepository.findById(estoqueId);
-        if (estoqueOptional.isPresent()) {
+        Optional<Produto> produtoOptional = produtoRepository.findById(produtoId);
+        
+        if (estoqueOptional.isPresent() && produtoOptional.isPresent()) {
             Estoque estoque = estoqueOptional.get();
-            produtoRepository.save(produto);
+            Produto produto = produtoOptional.get();
             EstoqueProduto estoqueProduto = new EstoqueProduto(null, estoque, produto, quantidade);
             estoqueProdutoRepository.save(estoqueProduto);
             model.addAttribute("message", "Produto cadastrado no estoque com sucesso!");
         } else {
-            model.addAttribute("message", "Estoque não encontrado.");
+            model.addAttribute("message", "Estoque ou Produto não encontrado.");
         }
-        model.addAttribute("produto", produto); // Adicione o objeto Produto ao modelo
-        model.addAttribute("estoques", estoqueRepository.findAll()); // Adicione a lista de estoques ao modelo
+        
+        model.addAttribute("produtos", produtoRepository.findAll());
+        model.addAttribute("estoques", estoqueRepository.findAll());
         return new ModelAndView("estoque/cadastro-produto-estoque");
     }
 }
