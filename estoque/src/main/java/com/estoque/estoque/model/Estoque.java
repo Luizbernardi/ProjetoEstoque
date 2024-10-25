@@ -27,7 +27,9 @@ public class Estoque {
     @OneToMany(mappedBy = "estoque")
     private List<EstoqueProduto> estoqueProdutos;
 
-    private LocalDateTime dataEntrada;
+    private String nome;
+
+    private LocalDateTime dataEntrada = LocalDateTime.now();
 
     private LocalDateTime dataSaida;
 }
