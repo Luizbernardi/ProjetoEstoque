@@ -247,6 +247,12 @@ public class EstoqueController {
         mv.addObject("estoque", estoque);
         return mv;
     }
+
+    @GetMapping("/home")
+    public ModelAndView home() {
+        ModelAndView mv = new ModelAndView("index");
+        return mv;
+    }
 }
 
 
