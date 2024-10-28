@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Lista de Produtos em Estoque</title>
 </head>
-
 <body>
     <h1>Lista de Produtos em Estoque</h1>
     <table>
@@ -15,20 +13,21 @@
                 <th>Nome do Produto</th>
                 <th>Quantidade em Estoque</th>
                 <th>Preço Unidade</th>
+                <th>Preço total do produto no estoque</th>
+                <th>Preço total do estoque</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="produtoEstoque : ${produtoestoque}">
-                <td th:text="${produtoEstoque.id}">ID</td>
-                <td th:text="${produtoEstoque.estoque.nome}">Nome do Estoque</td>
-                <td th:text="${produtoEstoque.produto.nome}">Nome do Produto</td>
-                <td th:text="${produtoEstoque.quantidade}">Quantidade em Estoque</td>
-                <td th:text="${produtoEstoque.produto.preco}">preço Estoque</td>
-
-
+            <tr th:each="estoqueProduto, iterStat : ${produtoestoque}">
+                <td th:text="${estoqueProduto.id}"></td>
+                <td th:text="${estoqueProduto.estoque.nome}"></td>
+                <td th:text="${estoqueProduto.produto.nome}"></td>
+                <td th:text="${estoqueProduto.quantidade}"></td>
+                <td th:text="${estoqueProduto.produto.preco}"></td>
+                <td th:text="${precosTotaisProdutos[iterStat.index]}"></td>
             </tr>
         </tbody>
     </table>
+    <h2>Preço total do estoque: <span th:text="${precoTotalEstoque}"></span></h2>
 </body>
-
 </html>
