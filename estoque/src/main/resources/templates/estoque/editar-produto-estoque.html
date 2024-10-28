@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Produto no Estoque</title>
+</head>
+<body>
+    <h1>Editar Produto no Estoque</h1>
+    <form th:action="@{/editar-produto-estoque}" th:object="${estoqueProduto}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="estoque">Estoque:</label>
+            <input type="text" id="estoque" th:field="*{estoque.nome}" readonly />
+        </div>
+        <div>
+            <label for="produto">Produto:</label>
+            <input type="text" id="produto" th:field="*{produto.nome}" readonly />
+        </div>
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" th:field="*{quantidade}" />
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+    <a th:href="@{/estoque/list-produto-estoque}">Cancelar</a>
+</body>
+</html>

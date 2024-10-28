@@ -14,7 +14,7 @@
                 <th>Quantidade em Estoque</th>
                 <th>Preço Unidade</th>
                 <th>Preço total do produto no estoque</th>
-                <th>Preço total do estoque</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +25,11 @@
                 <td th:text="${estoqueProduto.quantidade}"></td>
                 <td th:text="${estoqueProduto.produto.preco}"></td>
                 <td th:text="${precosTotaisProdutos[iterStat.index]}"></td>
+                <td>
+                    <a th:href="@{/estoque/excluir-produto-estoque/{id}(id=${estoqueProduto.id})}">Excluir</a>
+                    <a th:href="@{/estoque/editar-produto-estoque/{id}(id=${estoqueProduto.id})}">Excluir</a>
+
+                </td>
             </tr>
         </tbody>
     </table>

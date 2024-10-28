@@ -26,6 +26,10 @@
                 <td th:text="${produto.preco}">Preço</td>
                 <td th:text="${produto.dataEntrada}">Data de Entrada</td>
                 <td th:text="${produto.dataSaida}">Data de Saída</td>
+                <td>
+                    <a th:href="@{/estoque/excluir-produto/{id}(id=${produto.id})}">Excluir</a>
+                    <a th:href="@{/estoque/editar-produto/{id}(id=${produto.id})}">Editar</a>
+                </td>
             </tr>
         </tbody>
     </table>

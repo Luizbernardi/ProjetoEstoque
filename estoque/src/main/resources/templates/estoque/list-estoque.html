@@ -14,6 +14,7 @@
                 <th>Nome</th>
                 <th>Data de Entrada</th>
                 <th>Data de Saída</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,10 @@
                 <td th:text="${estoque.nome}">Nome</td>
                 <td th:text="${estoque.dataEntrada}">Data de Entrada</td>
                 <td th:text="${estoque.dataSaida}">Data de Saída</td>
+                <td>
+                    <a th:href="@{/estoque/excluir-estoque/{id}(id=${estoque.id})}">Excluir</a>
+                    <a th:href="@{/estoque/editar-estoque/{id}(id=${estoque.id})}">Editar</a>
+                </td>
             </tr>
         </tbody>
     </table>

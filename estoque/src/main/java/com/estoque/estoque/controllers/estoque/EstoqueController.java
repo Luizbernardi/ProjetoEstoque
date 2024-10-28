@@ -1,7 +1,6 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import com.estoque.estoque.service.EstoqueService;
 import com.estoque.estoque.service.ProdutoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -138,6 +138,70 @@ public class EstoqueController {
     public double calcularPrecoTotalEstoque(@RequestParam Long estoqueId) {
         return estoqueService.calcularPrecoTotalEstoque(estoqueId);
     }
+
+    @GetMapping("/excluir-produto/{id}")
+    public String excluirProduto(@PathVariable("id") Long id) {
+        produtoRepository.deleteById(id);
+        return "redirect:/estoque/list-produto";
+    }
+
+    @GetMapping("/excluir-estoque/{id}")
+    public String excluirEstoque(@PathVariable("id") Long id) {
+        estoqueRepository.deleteById(id);
+        return "redirect:/estoque/list-estoque";
+    }
+
+    @GetMapping("/excluir-produto-estoque/{id}")
+    public String excluirProdutoEstoque(@PathVariable("id") Long id) {
+        estoqueProdutoRepository.deleteById(id);
+        return "redirect:/estoque/list-produto-estoque";
+    }
+
+    @GetMapping("/editar-produto/{id}")
+    public ModelAndView editarProduto(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("estoque/editar-produto");
+        Produto produto = produtoRepository.findById(id).get();
+        mv.addObject("produto", produto);
+        return mv;
+    }
+
+    @PostMapping("/editar-produto")
+    public String editarProduto(@ModelAttribute Produto produto) {
+        produtoRepository.save(produto);
+        return "redirect:/estoque/list-produto";
+    }
+
+    @GetMapping("/editar-estoque/{id}")
+    public ModelAndView editarEstoque(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("estoque/editar-estoque");
+        Estoque estoque = estoqueRepository.findById(id).get();
+        mv.addObject("estoque", estoque);
+        return mv;
+    }
+
+    @PostMapping("/editar-estoque")
+    public String editarEstoque(@ModelAttribute Estoque estoque) {
+        estoqueRepository.save(estoque);
+        return "redirect:/estoque/list-estoque";
+    }
+
+    @GetMapping("/editar-produto-estoque/{id}")
+    public ModelAndView editarProdutoEstoque(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("estoque/editar-produto-estoque");
+        EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id).get();
+        mv.addObject("estoqueProduto", estoqueProduto);
+        return mv;
+    }
+
+    @PostMapping("/editar-produto-estoque")
+    public String editarProdutoEstoque(@ModelAttribute EstoqueProduto estoqueProduto) {
+        estoqueProdutoRepository.save(estoqueProduto);
+        return "redirect:/estoque/list-produto-estoque";
+    }
+
+
+    
+   
 
 
 }
