@@ -19,9 +19,9 @@
                             Cadastro
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/estoque/cadastro-produto">Cadastro de Produto</a></li>
-                            <li><a class="dropdown-item" href="/estoque/cadastro-estoque">Cadastro de Estoque</a></li>
-                            <li><a class="dropdown-item" href="/estoque/cadastro-produto-estoque">Cadastro Produto Estoque</a></li>
+                            <li><a class="dropdown-item" th:href="@{/estoque/cadastro-produto}">Cadastro de Produto</a></li>
+                            <li><a class="dropdown-item" th:href="@{/estoque/cadastro-estoque}">Cadastro de Estoque</a></li>
+                            <li><a class="dropdown-item" th:href="@{/estoque/cadastro-produto-estoque}">Cadastro Produto Estoque</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -29,13 +29,13 @@
                             Listagem
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/estoque/list-produto">Lista de Produtos</a></li>
-                            <li><a class="dropdown-item" href="/estoque/list-estoque">Lista de Estoques</a></li>
-                            <li><a class="dropdown-item" href="/estoque/list-produto-estoque">Lista de Produtos em Estoque</a></li>
+                            <li><a class="dropdown-item" th:href="@{/estoque/list-produto}">Lista de Produtos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/estoque/list-estoque}">Lista de Estoques</a></li>
+                            <li><a class="dropdown-item" th:href="@{/estoque/list-produto-estoque}">Lista de Produtos em Estoque</a></li>
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" action="/estoque/produto/nome" method="get">
+                <form class="d-flex" role="search" th:action="@{/estoque/produto/nome}" method="get">
                     <input class="form-control me-2" type="search" name="nome" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
