@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-
-
 @Controller
 @RequestMapping("/estoque")
 public class EstoqueController {
@@ -49,7 +46,6 @@ public class EstoqueController {
         mv.addObject("produto", new Produto());
         return mv;
     }
-
 
     @PostMapping("/cadastro-produto")
     public ModelAndView cadastrarProduto(@ModelAttribute Produto produto, Model model) {
@@ -81,10 +77,11 @@ public class EstoqueController {
     }
 
     @PostMapping("/cadastro-produto-estoque")
-    public ModelAndView cadastrarProdutoEmEstoque(@RequestParam Long estoqueId, @RequestParam Long produtoId, @RequestParam int quantidade, Model model) {
+    public ModelAndView cadastrarProdutoEmEstoque(@RequestParam Long estoqueId, @RequestParam Long produtoId,
+            @RequestParam int quantidade, Model model) {
         Optional<Estoque> estoqueOptional = estoqueRepository.findById(estoqueId);
         Optional<Produto> produtoOptional = produtoRepository.findById(produtoId);
-        
+
         if (estoqueOptional.isPresent() && produtoOptional.isPresent()) {
             Estoque estoque = estoqueOptional.get();
             Produto produto = produtoOptional.get();
@@ -94,18 +91,30 @@ public class EstoqueController {
         } else {
             model.addAttribute("message", "Estoque ou Produto não encontrado.");
         }
-        
+
         model.addAttribute("produtos", produtoRepository.findAll());
         model.addAttribute("estoques", estoqueRepository.findAll());
         return new ModelAndView("estoque/cadastro-produto-estoque");
     }
+
+    @GetMapping("/list-estoque")
+    public ModelAndView estoquelist() {
+        ModelAndView mv = new ModelAndView("estoque/list-estoque");
+        mv.addObject("admins", estoqueRepository.findAll());
+        return mv;
+    }
+
+    @GetMapping("/list-produto")
+    public ModelAndView produtolist() {
+        ModelAndView mv = new ModelAndView("estoque/list-produto");
+        mv.addObject("admins", produtoRepository.findAll());
+        return mv;
+    }
+
+    @GetMapping("/list-produto-estoque")
+    public ModelAndView produtoestoquelist() {
+        ModelAndView mv = new ModelAndView("estoque/list-produto-estoque");
+        mv.addObject("admins", estoqueProdutoRepository.findAll());
+        return mv;
+    }
 }
-    
-    
-    
-    
-
-
-
-    
-
