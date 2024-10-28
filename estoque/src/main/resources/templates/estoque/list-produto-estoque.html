@@ -11,15 +11,21 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Nome do Estoque</th>
                 <th>Nome do Produto</th>
                 <th>Quantidade em Estoque</th>
+                <th>Preço Unidade</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="produtoEstoque : ${produtoestoque}">
                 <td th:text="${produtoEstoque.id}">ID</td>
-                <td th:text="${produtoEstoque.nomeProduto}">Nome do Produto</td>
-                <td th:text="${produtoEstoque.quantidadeEstoque}">Quantidade em Estoque</td>
+                <td th:text="${produtoEstoque.estoque.nome}">Nome do Estoque</td>
+                <td th:text="${produtoEstoque.produto.nome}">Nome do Produto</td>
+                <td th:text="${produtoEstoque.quantidade}">Quantidade em Estoque</td>
+                <td th:text="${produtoEstoque.produto.preco}">preço Estoque</td>
+
+
             </tr>
         </tbody>
     </table>

@@ -12,14 +12,16 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Quantidade</th>
+                <th>Data de Entrada</th>
+                <th>Data de Saída</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="estoque : ${estoques}">
                 <td th:text="${estoque.id}">ID</td>
                 <td th:text="${estoque.nome}">Nome</td>
-                <td th:text="${estoque.quantidade}">Quantidade</td>
+                <td th:text="${estoque.dataEntrada}">Data de Entrada</td>
+                <td th:text="${estoque.dataSaida}">Data de Saída</td>
             </tr>
         </tbody>
     </table>

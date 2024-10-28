@@ -12,14 +12,20 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Descrição</th>
                 <th>Preço</th>
+                <th>Data de Entrada</th>
+                <th>Data de Saída</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="produto : ${produtos}">
                 <td th:text="${produto.id}">ID</td>
                 <td th:text="${produto.nome}">Nome</td>
+                <td th:text="${produto.descricao}">Descrição</td>
                 <td th:text="${produto.preco}">Preço</td>
+                <td th:text="${produto.dataEntrada}">Data de Entrada</td>
+                <td th:text="${produto.dataSaida}">Data de Saída</td>
             </tr>
         </tbody>
     </table>

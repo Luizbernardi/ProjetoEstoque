@@ -1,6 +1,5 @@
 package com.estoque.estoque.controllers.estoque;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,21 +99,21 @@ public class EstoqueController {
     @GetMapping("/list-estoque")
     public ModelAndView estoquelist() {
         ModelAndView mv = new ModelAndView("estoque/list-estoque");
-        mv.addObject("admins", estoqueRepository.findAll());
+        mv.addObject("estoques", estoqueRepository.findAll());
         return mv;
     }
 
     @GetMapping("/list-produto")
     public ModelAndView produtolist() {
         ModelAndView mv = new ModelAndView("estoque/list-produto");
-        mv.addObject("admins", produtoRepository.findAll());
+        mv.addObject("produtos", produtoRepository.findAll());
         return mv;
     }
 
     @GetMapping("/list-produto-estoque")
     public ModelAndView produtoestoquelist() {
         ModelAndView mv = new ModelAndView("estoque/list-produto-estoque");
-        mv.addObject("admins", estoqueProdutoRepository.findAll());
+        mv.addObject("produtoestoque", estoqueProdutoRepository.findAll());
         return mv;
     }
 }
