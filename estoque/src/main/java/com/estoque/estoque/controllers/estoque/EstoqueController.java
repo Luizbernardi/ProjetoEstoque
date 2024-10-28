@@ -15,9 +15,7 @@ import com.estoque.estoque.model.Produto;
 import com.estoque.estoque.repository.EstoqueProdutoRepository;
 import com.estoque.estoque.repository.EstoqueRepository;
 import com.estoque.estoque.repository.ProdutoRepository;
-import com.estoque.estoque.service.EstoqueProdutoService;
 import com.estoque.estoque.service.EstoqueService;
-import com.estoque.estoque.service.ProdutoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,11 +38,6 @@ public class EstoqueController {
     @Autowired
     private EstoqueService estoqueService;
 
-    @Autowired
-    private ProdutoService produtoService;
-
-    @Autowired
-    private EstoqueProdutoService estoqueProdutoService;
 
     @GetMapping("/cadastro-produto")
     public ModelAndView cadastroProduto(Produto produto) {
