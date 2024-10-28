@@ -210,17 +210,21 @@ public class EstoqueController {
     return "redirect:/estoque/list-produto-estoque";
     }
 
-    @GetMapping("/produto-estoque/{id}")   
+    @GetMapping("/produto-estoque/{id}")
     public ModelAndView produtoEstoque(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("estoque/produto-estoque");
         Produto produto = produtoRepository.findById(id).orElse(null);
-        mv.addObject("produto", produto);
-        mv.addObject("estoqueProdutos", estoqueProdutoRepository.findByProduto(produto));
+        if (produto == null) {
+            mv.addObject("errorMessage", "Produto não encontrado");
+        } else {
+            mv.addObject("produto", produto);
+            mv.addObject("estoqueProdutos", estoqueProdutoRepository.findByProduto(produto));
+        }
         return mv;
     }
 
     @GetMapping("/produto/{id}")
-    public ModelAndView produto(@PathVariable("id") Long id) {
+    public ModelAndView produtoPorId(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("estoque/produto");
         Produto produto = produtoRepository.findById(id).orElse(null);
         mv.addObject("produto", produto);
@@ -228,18 +232,28 @@ public class EstoqueController {
     }
 
     @GetMapping("/estoque/{id}")
-    public ModelAndView estoque(@PathVariable("id") Long id) {
+    public ModelAndView estoquePorId(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("estoque/estoque");
         Estoque estoque = estoqueRepository.findById(id).orElse(null);
         mv.addObject("estoque", estoque);
         return mv;
     }
 
+    @GetMapping("/produto/nome/{nome}")
+    public ModelAndView produtoPorNome(@PathVariable("nome") String nome) {
+        ModelAndView mv = new ModelAndView("estoque/produto");
+        Produto produto = produtoRepository.findByNome(nome);
+        mv.addObject("produto", produto);
+        return mv;
+    }
 
-
-
-    
-   
-
-
+    @GetMapping("/estoque/nome/{nome}")
+    public ModelAndView estoquePorNome(@PathVariable("nome") String nome) {
+        ModelAndView mv = new ModelAndView("estoque/estoque");
+        Estoque estoque = estoqueRepository.findByNome(nome);
+        mv.addObject("estoque", estoque);
+        return mv;
+    }
 }
+
+

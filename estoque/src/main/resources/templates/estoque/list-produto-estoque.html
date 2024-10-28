@@ -19,7 +19,9 @@
         </thead>
         <tbody>
             <tr th:each="estoqueProduto, iterStat : ${produtoestoque}">
-                <td th:text="${estoqueProduto.id}"></td>
+                <td>
+                    <a th:href="@{/estoque/produto-estoque/{id}(id=${estoqueProduto.id})}" th:text="${estoqueProduto.id}">ID</a>
+                </td>
                 <td th:text="${estoqueProduto.estoque.nome}"></td>
                 <td th:text="${estoqueProduto.produto.nome}"></td>
                 <td th:text="${estoqueProduto.quantidade}"></td>

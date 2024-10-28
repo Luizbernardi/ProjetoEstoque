@@ -18,8 +18,12 @@
         </thead>
         <tbody>
             <tr th:each="produto : ${produtos}">
-                <td th:text="${produto.id}">ID</td>
-                <td th:text="${produto.nome}">Nome</td>
+                <td>
+                    <a th:href="@{/estoque/produto/{id}(id=${produto.id})}" th:text="${produto.id}">ID</a>
+                </td>
+                <td>
+                    <a th:href="@{/estoque/produto/nome/{nome}(nome=${produto.nome})}" th:text="${produto.nome}">Nome</a>    
+                            </td>
                 <td th:text="${produto.descricao}">Descrição</td>
                 <td th:text="${produto.preco}">Preço</td>
                 <td>

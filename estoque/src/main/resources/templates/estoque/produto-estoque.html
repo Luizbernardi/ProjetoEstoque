@@ -5,14 +5,17 @@
 </head>
 <body>
     <h1>Produto no Estoque</h1>
-    <div>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div th:if="${produto}">
         <h2>Detalhes do Produto</h2>
         <p>ID: <span th:text="${produto.id}"></span></p>
         <p>Nome: <span th:text="${produto.nome}"></span></p>
         <p>Descrição: <span th:text="${produto.descricao}"></span></p>
         <p>Preço: <span th:text="${produto.preco}"></span></p>
     </div>
-    <div>
+    <div th:if="${produto}">
         <h2>Estoques</h2>
         <table>
             <thead>

@@ -17,8 +17,12 @@
         </thead>
         <tbody>
             <tr th:each="estoque : ${estoques}">
-                <td th:text="${estoque.id}">ID</td>
-                <td th:text="${estoque.nome}">Nome</td>
+                <td>
+                    <a th:href="@{/estoque/estoque/{id}(id=${estoque.id})}" th:text="${estoque.id}">ID</a>
+                </td>
+                <td>
+                    <a th:href="@{/estoque/estoque/nome/{nome}(nome=${estoque.nome})}" th:text="${estoque.nome}">Nome</a>
+                </td>
                 <td>
                     <a th:href="@{/estoque/excluir-estoque/{id}(id=${estoque.id})}">Excluir</a>
                     <a th:href="@{/estoque/editar-estoque/{id}(id=${estoque.id})}">Editar</a>
