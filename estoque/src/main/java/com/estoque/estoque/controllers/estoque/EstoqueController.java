@@ -240,7 +240,7 @@ public class EstoqueController {
         return mv;
     }
 
-    @GetMapping("/produto/nome/{nome}")
+    @GetMapping("/produto/nome")
     public ModelAndView SearchPorNome(@RequestParam("nome") String nome) {
         ModelAndView mv = new ModelAndView("estoque/produto");
         Produto produto = produtoRepository.findByNome(nome);
