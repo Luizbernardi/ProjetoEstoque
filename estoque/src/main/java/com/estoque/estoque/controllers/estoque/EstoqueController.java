@@ -195,9 +195,23 @@ public class EstoqueController {
 
     @PostMapping("/editar-produto-estoque")
     public String editarProdutoEstoque(@ModelAttribute EstoqueProduto estoqueProduto) {
+    // Verificar se o estoque e o produto estão salvos
+    Estoque estoque = estoqueRepository.findById(estoqueProduto.getEstoque().getId()).orElse(null);
+    Produto produto = produtoRepository.findById(estoqueProduto.getProduto().getId()).orElse(null);
+
+    if (estoque != null && produto != null) {
+        estoqueProduto.setEstoque(estoque);
+        estoqueProduto.setProduto(produto);
         estoqueProdutoRepository.save(estoqueProduto);
-        return "redirect:/estoque/list-produto-estoque";
+    } else {
+        // Tratar o caso em que o estoque ou o produto não foram encontrados
+        // Você pode lançar uma exceção ou redirecionar para uma página de erro
+        throw new IllegalArgumentException("Estoque ou Produto não encontrado");
+
     }
+
+    return "redirect:/estoque/list-produto-estoque";
+}
 
 
     

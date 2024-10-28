@@ -27,8 +27,7 @@
                 <td th:text="${precosTotaisProdutos[iterStat.index]}"></td>
                 <td>
                     <a th:href="@{/estoque/excluir-produto-estoque/{id}(id=${estoqueProduto.id})}">Excluir</a>
-                    <a th:href="@{/estoque/editar-produto-estoque/{id}(id=${estoqueProduto.id})}">Excluir</a>
-
+                    <a th:href="@{/estoque/editar-produto-estoque/{id}(id=${estoqueProduto.id})}">Editar</a>
                 </td>
             </tr>
         </tbody>

@@ -5,15 +5,17 @@
 </head>
 <body>
     <h1>Editar Produto no Estoque</h1>
-    <form th:action="@{/editar-produto-estoque}" th:object="${estoqueProduto}" method="post">
+    <form th:action="@{/estoque/editar-produto-estoque}" th:object="${estoqueProduto}" method="post">
         <input type="hidden" th:field="*{id}" />
         <div>
             <label for="estoque">Estoque:</label>
-            <input type="text" id="estoque" th:field="*{estoque.nome}" readonly />
+            <input type="hidden" th:field="*{estoque.id}" />
+            <input type="text" id="estoque" th:value="${estoqueProduto.estoque.nome}" readonly />
         </div>
         <div>
             <label for="produto">Produto:</label>
-            <input type="text" id="produto" th:field="*{produto.nome}" readonly />
+            <input type="hidden" th:field="*{produto.id}" />
+            <input type="text" id="produto" th:value="${estoqueProduto.produto.nome}" readonly />
         </div>
         <div>
             <label for="quantidade">Quantidade:</label>
