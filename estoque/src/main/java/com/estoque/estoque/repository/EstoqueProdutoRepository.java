@@ -12,4 +12,7 @@ import com.estoque.estoque.model.Produto;
 public interface EstoqueProdutoRepository extends JpaRepository <EstoqueProduto, Long> {
          Optional<EstoqueProduto> findByEstoqueAndProduto(Estoque estoque, Produto produto);
          List<EstoqueProduto> findByEstoque(Estoque estoque);
+        List<EstoqueProduto> findByProduto(Produto produto);
+
+         
 }

@@ -127,7 +127,6 @@ public class EstoqueController {
 
         return mv;
     }
-  
 
     @GetMapping("/preco-total-produto")
     public double calcularPrecoTotalProdutoNoEstoque(@RequestParam Long estoqueId, @RequestParam Long produtoId) {
@@ -207,11 +206,36 @@ public class EstoqueController {
         // Tratar o caso em que o estoque ou o produto não foram encontrados
         // Você pode lançar uma exceção ou redirecionar para uma página de erro
         throw new IllegalArgumentException("Estoque ou Produto não encontrado");
-
+    }
+    return "redirect:/estoque/list-produto-estoque";
     }
 
-    return "redirect:/estoque/list-produto-estoque";
-}
+    @GetMapping("/produto-estoque/{id}")   
+    public ModelAndView produtoEstoque(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("estoque/produto-estoque");
+        Produto produto = produtoRepository.findById(id).orElse(null);
+        mv.addObject("produto", produto);
+        mv.addObject("estoqueProdutos", estoqueProdutoRepository.findByProduto(produto));
+        return mv;
+    }
+
+    @GetMapping("/produto/{id}")
+    public ModelAndView produto(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("estoque/produto");
+        Produto produto = produtoRepository.findById(id).orElse(null);
+        mv.addObject("produto", produto);
+        return mv;
+    }
+
+    @GetMapping("/estoque/{id}")
+    public ModelAndView estoque(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("estoque/estoque");
+        Estoque estoque = estoqueRepository.findById(id).orElse(null);
+        mv.addObject("estoque", estoque);
+        return mv;
+    }
+
+
 
 
     
