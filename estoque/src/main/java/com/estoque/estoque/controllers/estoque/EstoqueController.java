@@ -160,7 +160,7 @@ public class EstoqueController {
     @GetMapping("/editar-produto/{id}")
     public ModelAndView editarProduto(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("estoque/editar-produto");
-        Produto produto = produtoRepository.findById(id).get();
+        Produto produto = produtoRepository.findById(id).orElse(null);
         mv.addObject("produto", produto);
         return mv;
     }
@@ -174,7 +174,7 @@ public class EstoqueController {
     @GetMapping("/editar-estoque/{id}")
     public ModelAndView editarEstoque(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("estoque/editar-estoque");
-        Estoque estoque = estoqueRepository.findById(id).get();
+        Estoque estoque = estoqueRepository.findById(id).orElse(null);
         mv.addObject("estoque", estoque);
         return mv;
     }
@@ -188,7 +188,7 @@ public class EstoqueController {
     @GetMapping("/editar-produto-estoque/{id}")
     public ModelAndView editarProdutoEstoque(@PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("estoque/editar-produto-estoque");
-        EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id).get();
+        EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id).orElse(null);
         mv.addObject("estoqueProduto", estoqueProduto);
         return mv;
     }
