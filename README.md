@@ -56,6 +56,12 @@ cd ProjetoEstoque
 
 http://localhost:8080
 
+## Diagrama de Classe
+
+![image](https://github.com/user-attachments/assets/0496afb4-8288-43ab-bca2-b9d43b2406a8)
+
+## Index
+
 ![Index](https://github.com/user-attachments/assets/1f863921-62f5-460b-a610-01bbe1127ed5)
 
 
