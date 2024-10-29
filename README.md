@@ -10,7 +10,8 @@ Este é um sistema de gerenciamento de estoque desenvolvido em Java utilizando S
 - Listagem de Produtos
 - Listagem de Estoques
 - Listagem de Produtos em Estoque
-- Exclusão de Produtos e Estoques
+- Exclusão de Produtos 
+- Exclusão de estoques
 
 ## Tecnologias Utilizadas
 
