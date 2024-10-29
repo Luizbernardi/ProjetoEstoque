@@ -9,7 +9,7 @@
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container mt-5">
         <h1>Editar Produto</h1>
-        <form th:action="@{/estoque/editar-produto}" th:object="${produto}" method="post" class="mt-3">
+        <form th:action="@{/estoque/editar-produto}" th:object="${produto}" method="post" class="mt-3" id="produtoForm">
             <input type="hidden" th:field="*{id}" />
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
@@ -21,7 +21,7 @@
             </div>
             <div class="mb-3">
                 <label for="preco" class="form-label">Preço:</label>
-                <input type="number" step="0.001" id="preco" th:field="*{preco}" class="form-control" required />
+                <input type="number" min="0.01" max="1000000" step="0.001" id="preco" th:field="*{preco}" class="form-control" required />
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a th:href="@{/estoque/list-produto}" class="btn btn-secondary ms-2">Cancelar</a>
