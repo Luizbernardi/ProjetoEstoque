@@ -33,13 +33,5 @@ public class Estoque {
 
     private LocalDateTime dataEntrada = LocalDateTime.now();
 
-    public void addEstoqueProduto(EstoqueProduto estoqueProduto) {
-        estoqueProdutos.add(estoqueProduto);
-        estoqueProduto.setEstoque(this);
-    }
-
-    public void removeEstoqueProduto(EstoqueProduto estoqueProduto) {
-        estoqueProdutos.remove(estoqueProduto);
-        estoqueProduto.setEstoque(null);
-    }
+    
 }
