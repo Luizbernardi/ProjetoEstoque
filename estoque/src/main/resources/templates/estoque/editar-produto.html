@@ -21,7 +21,7 @@
             </div>
             <div class="mb-3">
                 <label for="preco" class="form-label">Preço:</label>
-                <input type="number" step="0.01" id="preco" th:field="*{preco}" class="form-control" required />
+                <input type="number" step="0.001" id="preco" th:field="*{preco}" class="form-control" required />
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a th:href="@{/estoque/list-produto}" class="btn btn-secondary ms-2">Cancelar</a>

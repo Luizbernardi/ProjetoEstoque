@@ -2,6 +2,8 @@ package com.estoque.estoque.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +35,7 @@ public class Produto {
     @NotNull
     private Double preco;
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL , orphanRemoval = true)
     private List<EstoqueProduto> estoqueProdutos;
 
     private LocalDateTime dataEntrada = LocalDateTime.now();

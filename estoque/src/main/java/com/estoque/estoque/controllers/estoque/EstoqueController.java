@@ -139,12 +139,18 @@ public class EstoqueController {
 
     @GetMapping("/excluir-estoque/{id}")
     public String excluirEstoque(@PathVariable("id") Long id) {
+        List<EstoqueProduto> estoqueProdutos = estoqueProdutoRepository.findByProdutoId(id);
+        estoqueProdutoRepository.deleteAll(estoqueProdutos);
+
         estoqueRepository.deleteById(id);
         return "redirect:/estoque/list-estoque";
     }
 
     @GetMapping("/excluir-produto-estoque/{id}")
     public String excluirProdutoEstoque(@PathVariable("id") Long id) {
+        List<EstoqueProduto> estoqueProdutos = estoqueProdutoRepository.findByEstoqueId(id);
+        estoqueProdutoRepository.deleteAll(estoqueProdutos);
+
         estoqueProdutoRepository.deleteById(id);
         return "redirect:/estoque/list-produto-estoque";
     }
