@@ -55,3 +55,7 @@ cd ProjetoEstoque
 /mvnw spring-boot:run
 
 http://localhost:8080
+
+![Index](https://github.com/user-attachments/assets/1f863921-62f5-460b-a610-01bbe1127ed5)
+
+
