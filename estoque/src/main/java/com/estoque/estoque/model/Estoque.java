@@ -29,6 +29,7 @@ public class Estoque {
     @OneToMany(mappedBy = "estoque", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EstoqueProduto> estoqueProdutos = new ArrayList<>();
 
+    
     private String nome;
 
     private LocalDateTime dataEntrada = LocalDateTime.now();

@@ -13,11 +13,11 @@
             <input type="hidden" th:field="*{id}" />
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
-                <input type="text" id="nome" th:field="*{nome}" class="form-control" required />
+                <input type="text" maxlength="50" id="nome" th:field="*{nome}" class="form-control" required />
             </div>
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
-                <input type="text" id="descricao" th:field="*{descricao}" class="form-control" required />
+                <input type="text" maxlength="50" id="descricao" th:field="*{descricao}" class="form-control" required />
             </div>
             <div class="mb-3">
                 <label for="preco" class="form-label">Preço:</label>

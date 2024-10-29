@@ -28,7 +28,7 @@
                         <a th:href="@{/estoque/produto/nome/{nome}(nome=${produto.nome})}" th:text="${produto.nome}">Nome</a>
                     </td>
                     <td th:text="${produto.descricao}">Descrição</td>
-                    <td th:text="${produto.preco}">Preço</td>
+                    <td th:text="${produto.precoFormatado}">Preço</td>
                     <td>
                         <a th:href="@{/estoque/excluir-produto/{id}(id=${produto.id})}" class="btn btn-danger btn-sm">Excluir</a>
                         <a th:href="@{/estoque/editar-produto/{id}(id=${produto.id})}" class="btn btn-primary btn-sm">Editar</a>

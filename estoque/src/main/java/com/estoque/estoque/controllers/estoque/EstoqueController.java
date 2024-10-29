@@ -1,6 +1,9 @@
 package com.estoque.estoque.controllers.estoque;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,9 @@ public class EstoqueController {
 
     @Autowired
     private EstoqueService estoqueService;
+
+    private static final DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(Locale.of("pt", "BR")));
+
 
 
     @GetMapping("/cadastro-produto")
@@ -96,7 +102,9 @@ public class EstoqueController {
     @GetMapping("/list-produto")
     public ModelAndView produtolist() {
         ModelAndView mv = new ModelAndView("estoque/list-produto");
-        mv.addObject("produtos", produtoRepository.findAll());
+        List<Produto> produtos = produtoRepository.findAll();
+        produtos.forEach(produto -> produto.setPrecoFormatado(df.format(produto.getPreco())));
+        mv.addObject("produtos", produtos);
         return mv;
     }
     
@@ -106,17 +114,20 @@ public class EstoqueController {
         List<EstoqueProduto> estoqueProdutos = estoqueService.verificarEstoqueTotal();
         mv.addObject("produtoestoque", estoqueProdutos);
 
-        // Calcular o preço total de cada produto no estoque
-        List<Double> precosTotaisProdutos = estoqueProdutos.stream()
-                .map(ep -> ep.getQuantidade() * ep.getProduto().getPreco())
+        // Calcular o preço total de cada produto no estoque e formatar os preços unitários
+        List<String> precosTotaisProdutos = estoqueProdutos.stream()
+                .map(ep -> df.format(ep.getQuantidade() * ep.getProduto().getPreco()))
                 .collect(Collectors.toList());
         mv.addObject("precosTotaisProdutos", precosTotaisProdutos);
 
-        // Calcular o preço total do estoque
+        estoqueProdutos.forEach(ep -> ep.getProduto().setPrecoFormatado(df.format(ep.getProduto().getPreco())));
+
+        // Calcular o preço total do estoque e formatar
         double precoTotalEstoque = estoqueProdutos.stream()
                 .mapToDouble(ep -> ep.getQuantidade() * ep.getProduto().getPreco())
                 .sum();
-        mv.addObject("precoTotalEstoque", precoTotalEstoque);
+        String precoTotalEstoqueFormatado = df.format(precoTotalEstoque);
+        mv.addObject("precoTotalEstoque", precoTotalEstoqueFormatado);
 
         return mv;
     }

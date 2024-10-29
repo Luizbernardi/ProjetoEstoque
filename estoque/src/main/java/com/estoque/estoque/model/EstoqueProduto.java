@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,5 +32,7 @@ public class EstoqueProduto {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
+    @Min(value = 1, message = "A quantidade não pode ser menor que 1")
+    @Max(value = 100, message = "A quantidade não pode ser maior 100")
     private Integer quantidade;
 }
