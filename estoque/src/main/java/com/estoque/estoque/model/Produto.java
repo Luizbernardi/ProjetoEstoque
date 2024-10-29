@@ -1,6 +1,7 @@
 package com.estoque.estoque.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -36,7 +37,18 @@ public class Produto {
     private Double preco;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL , orphanRemoval = true)
-    private List<EstoqueProduto> estoqueProdutos;
+    private List<EstoqueProduto> estoqueProdutos = new ArrayList<>();
 
     private LocalDateTime dataEntrada = LocalDateTime.now();
+
+    public void addEstoqueProduto(EstoqueProduto estoqueProduto) {
+        estoqueProdutos.add(estoqueProduto);
+        estoqueProduto.setProduto(this);
+    }
+
+    public void removeEstoqueProduto(EstoqueProduto estoqueProduto) {
+        estoqueProdutos.remove(estoqueProduto);
+        estoqueProduto.setProduto(null);
+    }
+
 }
