@@ -33,7 +33,6 @@ public class Estoque {
 
     private LocalDateTime dataEntrada = LocalDateTime.now();
 
-    private LocalDateTime dataSaida;
 }
 
 

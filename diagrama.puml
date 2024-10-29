@@ -1,0 +1,35 @@
+@startuml diagrama_estoque
+
+class Produto {
+    - Long id
+    - String nome
+    - String descricao
+    - Double preco
+    - List<EstoqueProduto> estoqueProdutos
+    - LocalDateTime dataEntrada
+
+    + getters e setters
+}
+
+class EstoqueProduto {
+    - Long id
+    - Produto produto
+    - Estoque estoque
+    - Integer quantidade
+
+    + getters e setters
+}
+
+class Estoque {
+    - Long id
+    - String nome
+    - LocalDateTime dataEntrada
+    - List<EstoqueProduto> estoqueProdutos
+
+    + getters e setters
+}
+
+Produto "1" -- "0..*" EstoqueProduto : contém
+Estoque "1" -- "0..*" EstoqueProduto : contém
+
+@enduml

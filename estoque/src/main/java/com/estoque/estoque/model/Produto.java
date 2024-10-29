@@ -39,6 +39,4 @@ public class Produto {
     private List<EstoqueProduto> estoqueProdutos;
 
     private LocalDateTime dataEntrada = LocalDateTime.now();
-
-    private LocalDateTime dataSaida;
 }
