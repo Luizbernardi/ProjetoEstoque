@@ -26,7 +26,7 @@
                         <a th:href="@{/estoque/estoque/nome/{nome}(nome=${estoque.nome})}" th:text="${estoque.nome}">Nome</a>
                     </td>
                     <td>
-                        <a th:href="@{/estoque/excluir-estoque/{id}(id=${estoque.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                        <a th:href="@{/estoque/excluir-estoque/{id}(id=${estoque.id})}" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Excluir</a>
                         <a th:href="@{/estoque/editar-estoque/{id}(id=${estoque.id})}" class="btn btn-primary btn-sm">Editar</a>
                     </td>
                 </tr>
@@ -36,5 +36,10 @@
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function confirmDelete() {
+            return confirm('Tem certeza que deseja excluir este estoque?');
+        }
+    </script>
 </body>
 </html>
