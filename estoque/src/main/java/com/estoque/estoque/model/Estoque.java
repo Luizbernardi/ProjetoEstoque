@@ -23,24 +23,14 @@ import lombok.Setter;
 public class Estoque {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "estoque", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EstoqueProduto> estoqueProdutos = new ArrayList<>();
 
-    
     private String nome;
 
     private LocalDateTime dataEntrada = LocalDateTime.now();
 
-    public void addEstoqueProduto(EstoqueProduto estoqueProduto) {
-        estoqueProdutos.add(estoqueProduto);
-        estoqueProduto.setEstoque(this);
-    }
-
-    public void removeEstoqueProduto(EstoqueProduto estoqueProduto) {
-        estoqueProdutos.remove(estoqueProduto);
-        estoqueProduto.setEstoque(null);
-    }
 }

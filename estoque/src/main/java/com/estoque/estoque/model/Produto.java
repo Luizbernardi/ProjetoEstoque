@@ -26,7 +26,7 @@ import lombok.Setter;
 public class Produto {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -49,13 +49,4 @@ public class Produto {
      private transient String precoFormatado;
 
 
-    public void addEstoqueProduto(EstoqueProduto estoqueProduto) {
-        estoqueProdutos.add(estoqueProduto);
-        estoqueProduto.setProduto(this);
-    }
-
-    public void removeEstoqueProduto(EstoqueProduto estoqueProduto) {
-        estoqueProdutos.remove(estoqueProduto);
-        estoqueProduto.setProduto(null);
-    }
 }
