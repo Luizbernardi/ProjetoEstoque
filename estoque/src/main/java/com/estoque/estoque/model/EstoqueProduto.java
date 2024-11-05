@@ -25,11 +25,11 @@ public class EstoqueProduto {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "estoque_id")
+    @JoinColumn(name = "estoque_id", nullable = false)
     private Estoque estoque;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
     @Min(value = 1, message = "A quantidade não pode ser menor que 1")
