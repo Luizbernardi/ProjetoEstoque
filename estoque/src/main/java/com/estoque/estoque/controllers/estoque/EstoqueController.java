@@ -16,6 +16,8 @@ import com.estoque.estoque.repository.ProdutoRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -47,6 +49,24 @@ public class EstoqueController {
     @GetMapping("/estoque-produtos")
     public List<EstoqueProduto> getAllEstoqueProdutos() {
         return estoqueProdutoRepository.findAll();
+    }
+
+    //Criando Produto Rest APi
+    @PostMapping("/produtos")
+    public Produto createProduto(@RequestBody Produto produto) {
+        return produtoRepository.save(produto);
+    }
+
+    //Criando Estoque Rest APi
+    @PostMapping("/estoques")
+    public Estoque createEstoque(@RequestBody Estoque estoque) {
+        return estoqueRepository.save(estoque);
+    }
+
+    //Criando EstoqueProduto Rest APi
+    @PostMapping("/estoque-produtos")
+    public EstoqueProduto createEstoqueProduto(@RequestBody EstoqueProduto estoqueProduto) {
+        return estoqueProdutoRepository.save(estoqueProduto);
     }
 
 

@@ -1,10 +1,12 @@
 package com.estoque.estoque.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +33,7 @@ public class Estoque {
 
     private String nome;
 
-    private LocalDateTime dataEntrada = LocalDateTime.now();
+    @Column(name = "data_entrada", columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataEntrada = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 
 }
