@@ -2,7 +2,6 @@ package com.estoque.estoque.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.NumberFormat;

@@ -18,6 +18,7 @@ import com.estoque.estoque.repository.ProdutoRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -81,6 +82,23 @@ public class EstoqueController {
         EstoqueProduto novoEstoqueProduto = estoqueProdutoRepository.save(estoqueProduto);
         return ResponseEntity.ok(novoEstoqueProduto);
     }
+
+    //get estoque por id
+    @GetMapping("/estoques/{id}")
+    public ResponseEntity<Estoque> getEstoqueById(@PathVariable Long id) {
+        Estoque estoque = estoqueRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estoque não encontrado" + id));
+                return ResponseEntity.ok(estoque);
+    }
+
+    //get produto por id
+    @GetMapping("/produtos/{id}")
+    public ResponseEntity<Produto> getProdutoById(@PathVariable Long id) {
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado" + id));
+                return ResponseEntity.ok(produto);
+    }
+
 
 
 
