@@ -18,9 +18,12 @@ import com.estoque.estoque.repository.ProdutoRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -97,6 +100,45 @@ public class EstoqueController {
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado" + id));
                 return ResponseEntity.ok(produto);
+    }
+
+    @GetMapping("/estoque-produtos/{id}")
+    public ResponseEntity<EstoqueProduto> getEstoqueProdutoId(@PathVariable Long id) {
+        EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estoque Produto não encontrado" + id));
+                return ResponseEntity.ok(estoqueProduto);
+    }
+    
+    // update estoque
+    @PatchMapping("/estoques/{id}")
+    public ResponseEntity<Estoque> updateEstoque(@PathVariable Long id, @RequestBody Estoque estoqueDetalhes) {
+        Estoque estoque = estoqueRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estoque não encontrado" + id));
+        estoque.setNome(estoqueDetalhes.getNome());
+        Estoque updatedEstoque = estoqueRepository.save(estoque);
+        return ResponseEntity.ok(updatedEstoque);
+    }
+    
+    // update produto
+    @PatchMapping("produtos/{id}")
+    public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody Produto produtoDetalhes) {
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado" + id));
+        produto.setNome(produtoDetalhes.getNome());
+        produto.setDescricao(produtoDetalhes.getDescricao());
+        produto.setPreco(produtoDetalhes.getPreco());
+        Produto updatedProduto = produtoRepository.save(produto);
+        return ResponseEntity.ok(updatedProduto);
+    }
+
+    // update estoque produto
+    @PatchMapping("estoque-produtos/{id}")
+    public ResponseEntity<EstoqueProduto> updateEstoqueProduto(@PathVariable Long id, @RequestBody EstoqueProdutoRequest request) {
+        EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estoque Produto não encontrado" + id));
+        estoqueProduto.setQuantidade(request.getQuantidade());
+        EstoqueProduto updatedEstoqueProduto = estoqueProdutoRepository.save(estoqueProduto);
+        return ResponseEntity.ok(updatedEstoqueProduto);
     }
 
 
