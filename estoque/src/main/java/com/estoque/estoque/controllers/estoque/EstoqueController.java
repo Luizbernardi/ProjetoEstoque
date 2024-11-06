@@ -65,6 +65,7 @@ public class EstoqueController {
         return estoqueRepository.save(estoque);
     }
 
+    //Criando EstoqueProduto Rest APi
     @PostMapping("/estoque-produtos")
     public ResponseEntity<EstoqueProduto> createEstoqueProduto(@RequestBody EstoqueProdutoRequest request) {
         Estoque estoque = estoqueRepository.findById(request.getEstoqueId())
