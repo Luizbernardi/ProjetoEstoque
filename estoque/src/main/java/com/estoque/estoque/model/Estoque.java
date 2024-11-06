@@ -5,6 +5,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,8 +30,9 @@ public class Estoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "estoque", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EstoqueProduto> estoqueProdutos = new ArrayList<>();
+    private List<EstoqueProduto> estoqueProdutos;
 
     private String nome;
 

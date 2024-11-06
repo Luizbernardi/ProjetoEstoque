@@ -9,6 +9,7 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -49,8 +50,9 @@ public class Produto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "¤#,##0.00")
     private BigDecimal preco;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL , orphanRemoval = true)
-    private List<EstoqueProduto> estoqueProdutos = new ArrayList<>();
+    private List<EstoqueProduto> estoqueProdutos;
 
     @Column(name = "data_entrada", columnDefinition = "TIMESTAMP")
     private LocalDateTime dataEntrada = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);

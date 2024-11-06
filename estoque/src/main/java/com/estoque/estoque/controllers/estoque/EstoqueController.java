@@ -4,11 +4,13 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.estoque.model.Estoque;
 import com.estoque.estoque.model.EstoqueProduto;
+import com.estoque.estoque.model.EstoqueProdutoRequest;
 import com.estoque.estoque.model.Produto;
 import com.estoque.estoque.repository.EstoqueProdutoRepository;
 import com.estoque.estoque.repository.EstoqueRepository;
@@ -63,10 +65,20 @@ public class EstoqueController {
         return estoqueRepository.save(estoque);
     }
 
-    //Criando EstoqueProduto Rest APi
     @PostMapping("/estoque-produtos")
-    public EstoqueProduto createEstoqueProduto(@RequestBody EstoqueProduto estoqueProduto) {
-        return estoqueProdutoRepository.save(estoqueProduto);
+    public ResponseEntity<EstoqueProduto> createEstoqueProduto(@RequestBody EstoqueProdutoRequest request) {
+        Estoque estoque = estoqueRepository.findById(request.getEstoqueId())
+                .orElseThrow(() -> new RuntimeException("Estoque não encontrado"));
+        Produto produto = produtoRepository.findById(request.getProdutoId())
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        EstoqueProduto estoqueProduto = new EstoqueProduto();
+        estoqueProduto.setEstoque(estoque);
+        estoqueProduto.setProduto(produto);
+        estoqueProduto.setQuantidade(request.getQuantidade());
+
+        EstoqueProduto novoEstoqueProduto = estoqueProdutoRepository.save(estoqueProduto);
+        return ResponseEntity.ok(novoEstoqueProduto);
     }
 
 
