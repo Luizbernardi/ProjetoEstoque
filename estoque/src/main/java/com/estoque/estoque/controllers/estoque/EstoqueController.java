@@ -1,12 +1,15 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.estoque.model.Estoque;
@@ -31,8 +34,10 @@ public class EstoqueController {
 
     //listar todos os estoques
     @GetMapping("/estoques")
-    public List<Estoque> getAllEstoques() {
-        return estoqueRepository.findAll();
+    public ResponseEntity<Page<Estoque>> getAllEstoques(@RequestParam int page, @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Estoque> estoques = estoqueRepository.findAll(pageable);
+        return ResponseEntity.ok(estoques);
     }
 
     //Criando Estoque Rest APi
