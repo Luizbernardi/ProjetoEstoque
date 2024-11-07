@@ -1,6 +1,7 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class EstoqueController {
     @Autowired
     private EstoqueRepository estoqueRepository;
 
-    //listar todos os estoques
+    //listar todos os estoques com paginação
     @GetMapping("/estoques")
     public ResponseEntity<Page<Estoque>> getAllEstoques(@RequestParam int page, @RequestParam int size) {
         Pageable pageable = PageRequest.of(page, size);

@@ -1,6 +1,7 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.estoque.estoque.model.Produto;
 import com.estoque.estoque.repository.ProdutoRepository;
 
@@ -30,14 +30,13 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-   //listar todos os produtoss
+   //listar todos os produtos paginados
    @GetMapping("/produtos")
     public ResponseEntity<Page<Produto>> getAllProdutos(@RequestParam int page, @RequestParam int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Produto> produtos = produtoRepository.findAll(pageable);
         return ResponseEntity.ok(produtos);
     }
-
 
       //Criando Produto Rest APi
     @PostMapping("/produtos")
