@@ -1,6 +1,7 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,12 @@ public class EstoqueProdutoController {
         return ResponseEntity.ok(estoqueProdutos);
     }
 
+   //listar todos os produtos em estoque sem paginação
+   @GetMapping("/estoque-produtos/all")
+   public ResponseEntity<List<EstoqueProduto>> getAllEstoqueProdutos() {
+       List<EstoqueProduto> estoqueProdutos = estoqueProdutoRepository.findAll();
+       return ResponseEntity.ok(estoqueProdutos);
+   }
 
       //Criando EstoqueProduto Rest APi
     @PostMapping("/estoque-produtos")
