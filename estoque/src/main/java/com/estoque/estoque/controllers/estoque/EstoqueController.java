@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.estoque.model.Estoque;
@@ -174,6 +175,15 @@ public class EstoqueController {
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
+     // Buscar produtos por nome ou descrição
+    @GetMapping("/produtos/search")
+    public ResponseEntity<List<Produto>> findAllMatches(@RequestParam String termo) {
+        List<Produto> produtos = produtoRepository.findByNomeOrDescricaoContaining(termo);
+        return ResponseEntity.ok(produtos);
+    }
+
+    
 
 
 
