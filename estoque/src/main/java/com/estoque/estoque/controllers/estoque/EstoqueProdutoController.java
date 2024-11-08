@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estoque.estoque.exception.ResourceNotFoundException;
 import com.estoque.estoque.model.Estoque;
 import com.estoque.estoque.model.EstoqueProduto;
 import com.estoque.estoque.model.EstoqueProdutoRequest;
@@ -63,9 +64,9 @@ public class EstoqueProdutoController {
     @PostMapping("/estoque-produtos")
     public ResponseEntity<EstoqueProduto> createEstoqueProduto(@RequestBody EstoqueProdutoRequest request) {
         Estoque estoque = estoqueRepository.findById(request.getEstoqueId())
-                .orElseThrow(() -> new RuntimeException("Estoque não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque não encontrado"));
         Produto produto = produtoRepository.findById(request.getProdutoId())
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
 
         EstoqueProduto estoqueProduto = new EstoqueProduto();
         estoqueProduto.setEstoque(estoque);
@@ -79,7 +80,7 @@ public class EstoqueProdutoController {
      @GetMapping("/estoque-produtos/{id}")
     public ResponseEntity<EstoqueProduto> getEstoqueProdutoId(@PathVariable Long id) {
         EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estoque Produto não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque Produto não encontrado" + id));
                 return ResponseEntity.ok(estoqueProduto);
     }
 
@@ -87,7 +88,7 @@ public class EstoqueProdutoController {
     @PatchMapping("estoque-produtos/{id}")
     public ResponseEntity<EstoqueProduto> updateEstoqueProduto(@PathVariable Long id, @RequestBody EstoqueProdutoRequest request) {
         EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estoque Produto não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque Produto não encontrado" + id));
         estoqueProduto.setQuantidade(request.getQuantidade());
         EstoqueProduto updatedEstoqueProduto = estoqueProdutoRepository.save(estoqueProduto);
         return ResponseEntity.ok(updatedEstoqueProduto);
@@ -97,7 +98,7 @@ public class EstoqueProdutoController {
     @DeleteMapping("/estoque-produtos/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEstoqueProduto(@PathVariable Long id) {
         EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estoque Produto não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque Produto não encontrado" + id));
         estoqueProdutoRepository.delete(estoqueProduto);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

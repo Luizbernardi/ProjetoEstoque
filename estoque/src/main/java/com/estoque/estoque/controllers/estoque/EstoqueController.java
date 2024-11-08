@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estoque.estoque.exception.ResourceNotFoundException;
 import com.estoque.estoque.model.Estoque;
 import com.estoque.estoque.repository.EstoqueRepository;
 
@@ -50,7 +51,7 @@ public class EstoqueController {
     @GetMapping("/estoques/{id}")
     public ResponseEntity<Estoque> getEstoqueById(@PathVariable Long id) {
         Estoque estoque = estoqueRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estoque não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque não encontrado" + id));
                 return ResponseEntity.ok(estoque);
     }
 
@@ -59,7 +60,7 @@ public class EstoqueController {
     @PatchMapping("/estoques/{id}")
     public ResponseEntity<Estoque> updateEstoque(@PathVariable Long id, @RequestBody Estoque estoqueDetalhes) {
         Estoque estoque = estoqueRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estoque não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque não encontrado" + id));
         estoque.setNome(estoqueDetalhes.getNome());
         Estoque updatedEstoque = estoqueRepository.save(estoque);
         return ResponseEntity.ok(updatedEstoque);
@@ -70,7 +71,7 @@ public class EstoqueController {
     @DeleteMapping("/estoques/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEstoque(@PathVariable Long id) {
         Estoque estoque = estoqueRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Estoque não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estoque não encontrado" + id));
         estoqueRepository.delete(estoque);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

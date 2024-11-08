@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.estoque.estoque.exception.ResourceNotFoundException;
 import com.estoque.estoque.model.Produto;
 import com.estoque.estoque.repository.ProdutoRepository;
 
@@ -47,7 +49,7 @@ public class ProdutoController {
     @GetMapping("/produtos/{id}")
     public ResponseEntity<Produto> getProdutoById(@PathVariable Long id) {
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado" + id));
                 return ResponseEntity.ok(produto);
     }
 
@@ -55,7 +57,7 @@ public class ProdutoController {
     @PatchMapping("produtos/{id}")
     public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody Produto produtoDetalhes) {
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado" + id));
         produto.setNome(produtoDetalhes.getNome());
         produto.setDescricao(produtoDetalhes.getDescricao());
         produto.setPreco(produtoDetalhes.getPreco());
@@ -67,7 +69,7 @@ public class ProdutoController {
     @DeleteMapping("/produtos/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteProduto(@PathVariable Long id) {
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado" + id));
         produtoRepository.delete(produto);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
