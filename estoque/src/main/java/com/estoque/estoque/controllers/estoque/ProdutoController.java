@@ -1,6 +1,7 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,10 @@ public class ProdutoController {
         return ResponseEntity.ok(produtos);
     }
 
-    
+    @GetMapping("/produtos/search-cadastro")
+    public ResponseEntity<List<Produto>> searchProduto(@RequestParam String termo) {
+        List<Produto> produtos = produtoRepository.findByNomeContaining(termo);
+        return ResponseEntity.ok(produtos);
+    }
 
-    
 }

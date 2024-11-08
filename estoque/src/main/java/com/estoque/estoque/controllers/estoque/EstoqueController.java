@@ -1,6 +1,7 @@
 package com.estoque.estoque.controllers.estoque;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,18 @@ public class EstoqueController {
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/estoques/search-cadastro")
+    public ResponseEntity<List<Estoque>> searchEstoques(@RequestParam String termo) {
+        List<Estoque> estoques = estoqueRepository.findByNomeContaining(termo);
+        return ResponseEntity.ok(estoques);
+    }
+
+
+
+
+
+
     
 }
 

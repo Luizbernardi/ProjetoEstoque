@@ -61,6 +61,7 @@ public class EstoqueProdutoController {
    }
 
       //Criando EstoqueProduto Rest APi
+    //Criando EstoqueProduto Rest APi
     @PostMapping("/estoque-produtos")
     public ResponseEntity<EstoqueProduto> createEstoqueProduto(@RequestBody EstoqueProdutoRequest request) {
         Estoque estoque = estoqueRepository.findById(request.getEstoqueId())
@@ -76,7 +77,6 @@ public class EstoqueProdutoController {
         EstoqueProduto novoEstoqueProduto = estoqueProdutoRepository.save(estoqueProduto);
         return ResponseEntity.ok(novoEstoqueProduto);
     }
-
      @GetMapping("/estoque-produtos/{id}")
     public ResponseEntity<EstoqueProduto> getEstoqueProdutoId(@PathVariable Long id) {
         EstoqueProduto estoqueProduto = estoqueProdutoRepository.findById(id)
