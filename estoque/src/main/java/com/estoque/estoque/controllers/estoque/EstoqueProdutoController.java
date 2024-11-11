@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estoque.estoque.dto.EstoqueProdutoRequest;
 import com.estoque.estoque.exception.ResourceNotFoundException;
 import com.estoque.estoque.model.Estoque;
 import com.estoque.estoque.model.EstoqueProduto;
-import com.estoque.estoque.model.EstoqueProdutoRequest;
 import com.estoque.estoque.model.Produto;
 import com.estoque.estoque.repository.EstoqueProdutoRepository;
 import com.estoque.estoque.repository.EstoqueRepository;
