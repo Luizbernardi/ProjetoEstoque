@@ -40,7 +40,7 @@ public class Estoque {
     @Column(name = "data_entrada", columnDefinition = "TIMESTAMP")
     private LocalDateTime dataEntrada = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    // @ManyToOne
+    // @JoinColumn(name = "user_id", nullable = false)
+    // private User user;
 }

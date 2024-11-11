@@ -36,7 +36,7 @@ public class EstoqueProduto {
     @Max(value = 100, message = "A quantidade não pode ser maior 100")
     private Integer quantidade;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    // @ManyToOne
+    // @JoinColumn(name = "user_id", nullable = false)
+    // private User user;
 }

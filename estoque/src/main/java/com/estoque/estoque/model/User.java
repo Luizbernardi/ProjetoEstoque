@@ -2,6 +2,7 @@ package com.estoque.estoque.model;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class User {
 
     @Id
@@ -32,14 +34,14 @@ public class User {
     private String senha;
 
     
-   @OneToMany(mappedBy = "user")
-   private List<Produto> produtos;
+//    @OneToMany(mappedBy = "user")
+//    private List<Produto> produtos;
 
-   @OneToMany(mappedBy = "user")
-   private List<Estoque> estoques;
+//    @OneToMany(mappedBy = "user")
+//    private List<Estoque> estoques;
 
-   @OneToMany(mappedBy = "user")
-   private List<EstoqueProduto> estoqueProdutos;
+//    @OneToMany(mappedBy = "user")
+//    private List<EstoqueProduto> estoqueProdutos;
     
     
 }
